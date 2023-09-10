@@ -12,7 +12,6 @@
     background-color: #fff;
 }
 
-
 #welcome-pattern {
     --s: 100px;
     /* control the size */
@@ -28,11 +27,4 @@
         radial-gradient(100% 50% at 0 50%, var(--_g)),
         radial-gradient(100% 50% at 100% 100%, var(--_g));
     background-size: var(--s) calc(2*var(--s));
-}
-
-#top-tracks {
-    /* background: linear-gradient(45deg, #4b41ff 10%, transparent 10%), linear-gradient(135deg, transparent 90%, #4b41ff 90%);
-    background-size: 4em 4em;
-    background-color: #00bc7a;
-    opacity: 1 */
 }
