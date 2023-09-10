@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 function App() {
   const { isAuth } = useGlobalState()
-  const [timeRange, setTimeRange] = useState<string>('short_term')
+  const [timeRange, setTimeRange] = useState<string>('medium_term')
 
   useEffect(() => {
     ScrollTrigger.refresh()
