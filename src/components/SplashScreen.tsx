@@ -7,7 +7,7 @@ export default function SplashScreen() {
             </div>
             <div className="bg-white p-4 rounded-3xl drop-shadow-xl">
                 <h1 className="text-4xl font-bold text-center mb-2">Can't wait for your Spotify wrap?</h1>
-                <h2 className="text-2xl italic text-center">Log in to get a sneak peak!</h2>
+                <h2 className="text-2xl italic text-center mb-2">Log in to get a sneak peak!</h2>
             </div>
         </div>
     )

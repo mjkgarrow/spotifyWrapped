@@ -4,9 +4,6 @@ import CircleLoading from "../components/CircleLoading"
 import TopTracksSection from "../components/TopTracksSection"
 import WelcomeSection from "../components/WelcomeSection"
 import EmptySection from "../components/EmptySection"
-import TopTracks from "../components/TopTracks"
-
-
 
 type props = {
     timeRange: string
@@ -37,8 +34,6 @@ export default function HomePage(props: props) {
                     <WelcomeSection />
 
                     <TopTracksSection tracks={data.tracks} limit={5} />
-
-                    <TopTracks tracks={data.tracks} limit={5} />
 
                     <EmptySection backgroundColour="bg-orange-400" />
                 </main>

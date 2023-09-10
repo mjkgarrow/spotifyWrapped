@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      {/* <Header set={setTimeRange} get={timeRange} /> */}
+      <Header set={setTimeRange} get={timeRange} />
       {isAuth() ? <HomePage timeRange={timeRange} /> : <SplashScreen />}
     </>
   )
