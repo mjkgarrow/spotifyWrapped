@@ -1,5 +1,6 @@
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-const URL = import.meta.env.VITE_BASE_URL;
+const CLIENT_ID: string = import.meta.env.VITE_CLIENT_ID;
+const REDIRECT_URI: string = import.meta.env.VITE_REDIRECT_URL;
+const SCOPES: string[] = JSON.parse(import.meta.env.VITE_SPOTIFY_SCOPES)
 
 function generateCodeVerifier(length: number): string {
     let text = '';
@@ -29,11 +30,11 @@ export async function requestAuthorisation() {
 
     const params = new URLSearchParams();
     params.append("client_id", CLIENT_ID);
-    params.append("response_type", "code");
-    params.append("redirect_uri", URL + "/callback");
-    params.append("scope", "user-top-read user-read-private user-read-email playlist-read-private user-follow-read");
-    params.append("code_challenge_method", "S256");
+    params.append("redirect_uri", REDIRECT_URI);
+    params.append("scope", SCOPES.join(' '));
     params.append("code_challenge", challenge);
+    params.append("response_type", "code");
+    params.append("code_challenge_method", "S256");
 
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
@@ -43,10 +44,10 @@ export async function getAccessToken(code: string) {
 
     const params = new URLSearchParams();
     params.append("client_id", CLIENT_ID);
+    params.append("redirect_uri", REDIRECT_URI);
+    params.append("code_verifier", verifier!);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:5173/callback");
-    params.append("code_verifier", verifier!);
 
     try {
         const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -56,6 +57,7 @@ export async function getAccessToken(code: string) {
             },
             body: params
         })
+
 
         if (!response.ok) {
             throw new Error('HTTP status ' + response.status);
