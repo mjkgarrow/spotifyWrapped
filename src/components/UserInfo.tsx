@@ -25,10 +25,6 @@ export default function UserInfo() {
         }).catch(error => console.log(error))
     }, [])
 
-    function capitalise(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
     return (
         <div className='flex items-center'>
 
@@ -64,12 +60,6 @@ export default function UserInfo() {
                             <ListItem>
                                 <ListItemText primary="Following" secondary={profile.following.length} />
                             </ListItem>
-                            {/* <ListItem>
-                                <ListItemText primary="Country" secondary={profile.user.country} />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Account type" secondary={capitalise(profile.user.product)} />
-                            </ListItem> */}
                         </List>
                     </Menu>
                 </div>
