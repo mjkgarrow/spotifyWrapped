@@ -28,3 +28,11 @@
         radial-gradient(100% 50% at 100% 100%, var(--_g));
     background-size: var(--s) calc(2*var(--s));
 }
+
+.hide {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+}
