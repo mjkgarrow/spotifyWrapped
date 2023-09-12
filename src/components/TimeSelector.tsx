@@ -20,7 +20,8 @@ export default function TimeSelector(props: props) {
     };
 
     const handleClick = (event: any) => {
-        setAnchorEl(null);
+        event.preventDefault()
+        setAnchorEl(null)
         if (event.target.value) {
             set(event.target.value)
         }

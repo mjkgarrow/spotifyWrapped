@@ -15,10 +15,10 @@ export default function HomePage(props: props) {
     const { timeRange } = props
     const { data, checkEmpty, makeApiCall } = useGlobalState()
 
-
     useEffect(() => {
         makeApiCall('artists', timeRange)
         makeApiCall('tracks', timeRange)
+
     }, [timeRange])
 
     // ---- TODO -----
@@ -32,14 +32,14 @@ export default function HomePage(props: props) {
             {checkEmpty() ?
                 <CircleLoading /> :
                 <main className="w-screen overflow-hidden">
+                    <div id='top'></div>
                     <WelcomeSection />
 
-                    <TopArtistsSection artists={data.artists} limit={5} />
+                    {data.artists.length && <TopArtistsSection artists={data.artists.slice(0, 5)} />}
 
-                    <TopTracksSection tracks={data.tracks} limit={5} />
+                    {data.tracks.length && <TopTracksSection tracks={data.tracks.slice(0, 5)} />}
 
-                    <TopGenresSection artists={data.artists} />
-
+                    {data.tracks.length && <TopGenresSection tracks={data.tracks.slice(0, 99)} />}
 
                     <EmptySection backgroundColour="bg-orange-400" />
                 </main>
