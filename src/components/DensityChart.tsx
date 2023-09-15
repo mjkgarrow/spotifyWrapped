@@ -2,8 +2,11 @@ import { ChangeEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { kernelDensityEstimator, kernelEpanechnikov } from '../utils/helpers'
 import gsap from "gsap";
 import { AudioFeatures, Track } from "../types/spotifyTypes";
+// @ts-ignore
 import * as d3 from "d3";
+// @ts-ignore
 import anime from 'animejs/lib/anime.es.js';
+import { AnimeInstance } from "../types/animeJsTypes";
 
 type TopTracksType = Track & AudioFeatures
 
@@ -78,7 +81,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
         return rawX * ((screenSize[0]) / domain[1])
     }
 
-    const getLineXCoord = (svgAnim) => {
+    const getLineXCoord = (svgAnim: AnimeInstance) => {
         const currentLineX = line.current!.getPointAtLength(Number(svgAnim.animations[0].currentValue.split('px')[0])).x
         return currentLineX
     }
@@ -140,8 +143,11 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             topTracks.forEach((track) => {
 
                 // Calculate the adjusted x and y coordinates for the center anchor point
-                const x = getXCoord(track[graphType]) - imageSize / 2;
-                const y = findY(getXCoord(track[graphType])) - imageSize / 2;
+                // @ts-ignore
+                const x = getXCoord(track[graphType]) - imageSize / 2
+
+                // @ts-ignore
+                const y = findY(getXCoord(track[graphType])) - imageSize / 2
 
                 const foreignObject = svgElement.append('foreignObject')
                     .attr("class", "topTrack-label")
@@ -276,7 +282,9 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             svgAnim2.seek(prog)
 
             d3.select(graphPic.current).selectAll(".topTrack-label")
+                // @ts-ignore
                 .each(function (_, index: number) {
+                    // @ts-ignore
                     const xCoord = getXCoord(topTracks[index][graphType]);
                     const lineXCoord = getLineXCoord(svgAnim2);
                     const threshold = xCoord - 10
@@ -286,6 +294,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
                     const opacity = xCoord < lineXCoord ? 1 : opacityPct;
 
+                    // @ts-ignore
                     d3.select(this).attr("style", `opacity: ${opacity}`);
                 });
         }

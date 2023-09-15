@@ -93,6 +93,7 @@ export default function ListeningSection(props: props) {
         const dataArray: number[] = [];
 
         topTrackData.map((item: TopTracksType) => {
+            // @ts-ignore
             dataArray.push(item[key]);
         })
 

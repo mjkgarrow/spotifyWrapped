@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useGlobalState } from '../context/globalState';
 import { getAccessToken } from "../api/spotifyAuth";
 import { useNavigate } from "react-router-dom";

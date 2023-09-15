@@ -1,5 +1,5 @@
 import gsap from 'gsap'
-import { useEffect, useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 export default function Cursor() {
 

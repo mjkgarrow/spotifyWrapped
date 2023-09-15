@@ -7,7 +7,6 @@ import App from './App.tsx'
 import './index.css'
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import React from 'react'
 
 const theme = createTheme({
   palette: {
