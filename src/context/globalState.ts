@@ -98,36 +98,44 @@ export const useGlobalState = () => {
     }
 
     // data: TimeRangeDataObject, setData: RecoilSetter<TimeRangeDataObject>
-    function makeApiCall(type: string, timeRange: string, limit: number = 50, offset: number = 0) {
-        let termData: TimeRangeDataObject
-        let setTermData: RecoilSetter<TimeRangeDataObject>
+    async function makeApiCall(types: string[], timeRange: string, limit: number = 50, offset: number = 0) {
+        let termData: TimeRangeDataObject;
+        let setTermData: RecoilSetter<TimeRangeDataObject>;
 
         // Select state storage backup
         switch (timeRange) {
             case 'medium_term':
-                termData = mediumData
-                setTermData = setMediumData
+                termData = mediumData;
+                setTermData = setMediumData;
                 break;
             case 'long_term':
-                termData = longData
-                setTermData = setLongData
+                termData = longData;
+                setTermData = setLongData;
                 break;
             default:
-                termData = shortData
-                setTermData = setShortData
+                termData = shortData;
+                setTermData = setShortData;
                 break;
         }
 
-        // Fetch query and then save to global state if there isn't already data in the state
-        if (!(termData[type] as DefaultDataObject).length) {
-            getTopItems(type, limit, offset, timeRange)
-                .then(res => {
-                    setData(prev => ({ ...prev, [type]: res.items }))
-                    setTermData(prev => ({ ...prev, [type]: res.items }))
-                })
-        } else { // if there is already data, move it to the current data state
-            setData(termData)
-        }
+        // Create an array of promises for each type
+        const promises = types.map((type) => {
+            if (!(termData[type] as DefaultDataObject).length) {
+                return getTopItems(type, limit, offset, timeRange);
+            } else {
+                return Promise.resolve({ items: termData[type] }); // Resolve with the existing data
+            }
+        });
+
+        // Use Promise.all to fetch data concurrently
+        const results = await Promise.all(promises);
+
+        // Update the data in state for each type
+        results.forEach((res, index) => {
+            const type = types[index];
+            setData((prev) => ({ ...prev, [type]: res.items }));
+            setTermData((prev) => ({ ...prev, [type]: res.items }));
+        });
     }
 
     const checkEmpty = (): boolean => {
