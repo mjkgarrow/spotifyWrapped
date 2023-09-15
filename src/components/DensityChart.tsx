@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { kernelDensityEstimator, kernelEpanechnikov } from '../utils/helpers'
 import gsap from "gsap";
 import { AudioFeatures, Track } from "../types/spotifyTypes";
-// @ts-ignore
 import * as d3 from "d3";
 // @ts-ignore
 import anime from 'animejs/lib/anime.es.js';
@@ -110,8 +109,8 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
     // Compute y-axis scale
     const yScale = useMemo(() => {
-        const max = Math.max(...density.map((d) => d[1]))
-        const min = Math.min(...density.map((d) => d[1]))
+        const max = Math.max(...density.map((d) => d[1]!))
+        const min = Math.min(...density.map((d) => d[1]!))
 
         return d3.scaleLinear()
             .range([screenSize[1] - 10, 50])
@@ -127,7 +126,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             .y((d: number[]) => yScale(d[1]))
             .curve(d3.curveBasis)
 
-        return lineGenerator(density)
+        return lineGenerator(density as [number, number][] | Iterable<[number, number]>)
 
     }, [density, rangeVal, screenSize])
     // -----------------------------------------
@@ -333,7 +332,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                 <svg ref={graphPic} width={screenSize[0]} height={screenSize[1] + 20} className="overflow-visible">
                     <path
                         ref={line}
-                        d={path}
+                        d={path!}
                         fill="none"
                         opacity={1}
                         stroke={`${colours[1]}`}
@@ -343,7 +342,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                     />
                     <path
                         ref={line2}
-                        d={path}
+                        d={path!}
                         fill="none"
                         opacity={0}
                     />
