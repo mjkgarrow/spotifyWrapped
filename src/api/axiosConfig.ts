@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Create an axios instance with custom configuration
 const api = axios.create({
-    baseURL: import.meta.env.VITE_BASE_SPOTIFY_URL,
+    baseURL: 'https://api.spotify.com/',
 })
 
 // add the spotify token from localStorage to all outgoing requests

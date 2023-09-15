@@ -1,6 +1,6 @@
-const CLIENT_ID: string = import.meta.env.VITE_CLIENT_ID;
-const REDIRECT_URI: string = import.meta.env.VITE_REDIRECT_URL;
-const SCOPES: string[] = JSON.parse(import.meta.env.VITE_SPOTIFY_SCOPES)
+const CLIENT_ID: string = 'e68b332488db43fb8639650151541950'
+const REDIRECT_URI: string = 'http://localhost:5173/callback'
+const SCOPES: string[] = ["user-top-read", "user-follow-read"]
 
 function generateCodeVerifier(length: number): string {
     let text = '';
