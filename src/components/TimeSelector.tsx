@@ -1,19 +1,22 @@
 import { Menu } from '@mui/material';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGlobalState } from '../context/globalState';
 
-type props = {
-    set: any,
-    get: string,
-}
+export default function TimeSelector() {
 
-export default function TimeSelector(props: props) {
-    const { set, get } = props
+    const [timeRange, setTimeRange] = useState<string>('medium_term')
+    const { makeApiCall } = useGlobalState()
 
+    useEffect(() => {
+        makeApiCall(['tracks', 'artists'], timeRange)
+    }, [timeRange])
+
+    // Variables to handle dropdown opening
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
     const open = Boolean(anchorEl);
+
 
     const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -22,18 +25,16 @@ export default function TimeSelector(props: props) {
     const handleClick = (event: any) => {
         event.preventDefault()
         setAnchorEl(null)
-        if (event.target.value) {
-            set(event.target.value)
-        }
+        setTimeRange(event.target.value)
     };
 
     return (
         <>
             <div className='hidden sm:block min-w-max'>
                 <ButtonGroup variant="outlined" color='secondary' aria-label="outlined secondary text button group" className='h-fit'>
-                    <Button onClick={handleClick} value='short_term' variant={get === 'short_term' ? 'contained' : 'outlined'} >4 weeks</Button>
-                    <Button onClick={handleClick} value='medium_term' variant={get === 'medium_term' ? 'contained' : 'outlined'}>6 months</Button>
-                    <Button onClick={handleClick} value='long_term' variant={get === 'long_term' ? 'contained' : 'outlined'}>All time</Button>
+                    <Button onClick={handleClick} value='short_term' variant={timeRange === 'short_term' ? 'contained' : 'outlined'} >4 weeks</Button>
+                    <Button onClick={handleClick} value='medium_term' variant={timeRange === 'medium_term' ? 'contained' : 'outlined'}>6 months</Button>
+                    <Button onClick={handleClick} value='long_term' variant={timeRange === 'long_term' ? 'contained' : 'outlined'}>All time</Button>
                 </ButtonGroup>
             </div>
 

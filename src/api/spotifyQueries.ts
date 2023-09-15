@@ -1,5 +1,5 @@
 import api from './axiosConfig';
-import { Artist, SimplifiedPlaylist, UserProfile } from '../types/spotifyTypes';
+import { Artist, SimplifiedPlaylist, UserProfile, AudioFeaturesCollection } from '../types/spotifyTypes';
 
 export async function getProfile(): Promise<UserProfile> {
     const response = await api.get('v1/me')
@@ -62,6 +62,15 @@ export async function getTopItems(type: string, limit: number, offset: number, t
     if (queryParams.length > 0) {
         uri += `?${queryParams.join('&')}`;
     }
+
+    // Make the API request
+    const response = await api.get(uri);
+
+    return response.data;
+}
+
+export async function getTracksFeatures(ids: string[]): Promise<AudioFeaturesCollection> {
+    let uri = `v1/audio-features?ids=${ids.join()}`
 
     // Make the API request
     const response = await api.get(uri);
