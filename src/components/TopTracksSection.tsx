@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap"
 import { Track } from "../types/spotifyTypes";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -35,9 +35,30 @@ export default function TopTracksSection(props: props) {
                         onRefresh: () => ScrollTrigger.refresh(true),
                     },
                 });
+
+                // Add fade-in-out effect
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: spacerRefs.current[index],
+                        start: 'top 90%',
+                        end: 'bottom top',
+                        scrub: true,
+                        onRefresh: () => ScrollTrigger.refresh(true),
+                    },
+                })
+                    .from(element, {
+                        opacity: 0,
+                    })
+                    .to(element, {
+                        opacity: 1,
+                    })
+                    .to(element, {
+                        opacity: 0,
+                    })
+
             })
 
-            // Scroll trigger for left title, endtrigger is last element in tracks list
+            // Scroll trigger for left title, start on first track end on last track
             gsap.to(wrapperRef.current, {
                 scrollTrigger: {
                     trigger: rightRef.current,
@@ -49,12 +70,24 @@ export default function TopTracksSection(props: props) {
                 }
             })
 
+            // Scroll trigger for left title fade, only trigger on final element
+            gsap.fromTo(leftRef.current, { opacity: 1 }, {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: spacerRefs.current[spacerRefs.current.length - 1],
+                    start: "top top",
+                    scrub: true,
+                    endTrigger: spacerRefs.current[spacerRefs.current.length - 1],
+                    onRefresh: () => ScrollTrigger.refresh(true),
+                }
+            })
+
             // // Scroll trigger for background colour
             const timeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: wrapperRef.current,
-                    start: "top top", // Start the animation at the top of the element
-                    end: "bottom bottom", // End the animation at the bottom of the element
+                    start: "top top",
+                    end: "bottom bottom",
                     scrub: true,
                 },
             });
@@ -84,6 +117,33 @@ export default function TopTracksSection(props: props) {
         return () => ctx.revert()
     }, [tracks]);
 
+    const handlePlayClick = (event: React.MouseEvent, id: string) => {
+        const track = tracks.find(track => track.id === id)!
+
+        if (track.preview_url) {
+            event.preventDefault()
+            const playIcon = document.getElementById(`play-${track.id}`)!
+            const audio: HTMLAudioElement = document.getElementById(`audio-${track.id}`) as HTMLAudioElement
+
+            audio.volume = 0.1
+
+            // Add event listeners to track audio state changes
+            audio.addEventListener("play", () => {
+                playIcon.classList.add("animate-spin");
+            });
+
+            audio.addEventListener("pause", () => {
+                playIcon.classList.remove("animate-spin");
+            });
+
+            // Toggle play/pause
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+    }
 
     return (
         <section ref={comp}>
@@ -119,14 +179,17 @@ export default function TopTracksSection(props: props) {
 
             {/* Final track list */}
             <div className='flex bg-[#9F6FE2] justify-around'>
-                <div className='flex flex-col gap-4 pb-[50vh]'>
+                <div className='flex flex-col gap-4'>
 
                     {tracks.map((track, index) => {
                         return (
                             <a
-                                href={track.external_urls.spotify} target='_blank'
+                                // href={track.external_urls.spotify}
+                                href={`${track.preview_url ? '#' : track.external_urls.spotify}`}
+                                target='_blank'
                                 key={track.id}
                                 ref={ref => { finalTrackRefs.current[index] = ref }}
+                                onClick={(event) => handlePlayClick(event, track.id)}
                                 className="shadow-xl group rounded-xl p-2 pr-8 hover:shadow-2xl hover:bg-green-200/30 transition-all duration-75 ease-in-out">
                                 <div className="flex gap-4 items-center ">
                                     <div>
@@ -141,7 +204,15 @@ export default function TopTracksSection(props: props) {
                                     </div>
 
                                     <div className="ml-auto">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
+                                        {track.preview_url ? (
+                                            <>
+                                                <audio id={`audio-${track.id}`} src={track.preview_url!} data-wave-id={track.id} ></audio>
+
+                                                <svg id={`play-${track.id}`} xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512" className="transition-transform duration-100 ease-in-out"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
+                                            </>
+                                        ) :
+                                            <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8' alt='spotify logo'></img>
+                                        }
                                     </div>
                                 </div>
                             </a>
@@ -149,6 +220,6 @@ export default function TopTracksSection(props: props) {
                     })}
                 </div>
             </div >
-        </section >
+        </section>
     )
 }

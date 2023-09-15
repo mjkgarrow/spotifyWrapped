@@ -75,8 +75,8 @@ export default function TopArtistsSection(props: props) {
             {/* Main artists reveal */}
             <div ref={wrapperRef} className="bg-purple-400">
 
-                <div className="absolute top-[10vh] w-screen z-10">
-                    <div className="w-screen flex justify-center">
+                <div className="absolute w-screen z-10">
+                    <div className="w-screen flex justify-center mt-32">
                         <div className="w-fit text-4xl font-serif bg-white rounded-xl p-2 sm:p-4 drop-shadow-lg">Your fave artists</div>
                     </div>
                 </div>
@@ -90,17 +90,17 @@ export default function TopArtistsSection(props: props) {
                         return (
                             <div
                                 key={artist.id}
-                                className='panel h-screen w-screen shadow-2xl flex gap-4 justify-center items-center flex-col'
+                                className='panel h-screen pt-[10vh] w-screen shadow-2xl flex gap-4 justify-center items-center flex-col'
 
                                 style={{ backgroundColor: `${colours[index]}` }}>
 
-                                <p className="font-mono text-4xl sm:text-6xl w-6 sm:w-14 text-right">#{index + 1}</p>
+                                <p className="font-mono text-2xl sm:text-6xl w-6 sm:w-14 text-right">#{index + 1}</p>
 
                                 <div>
 
-                                    <img id={index.toString()} src={artist.images[0].url} alt={artist.name} className="w-72 h-7w-72 sm:w-96 sm:h-96 rounded-lg absolute blur-lg scale-[1.01] -z-10" />
+                                    <img id={index.toString()} src={artist.images[0].url} alt={artist.name} className="w-72 h-7w-72 sm:w-80 sm:h-80 rounded-lg absolute blur-lg scale-[1.01] -z-10" />
 
-                                    <img id={index.toString()} src={artist.images[0].url} alt={artist.name} className="w-72 h-7w-72 sm:h-96 sm:w-96 rounded-lg" />
+                                    <img id={index.toString()} src={artist.images[0].url} alt={artist.name} className="w-72 h-7w-72 sm:h-80 sm:w-80 rounded-lg" />
 
                                 </div>
 
@@ -137,7 +137,7 @@ export default function TopArtistsSection(props: props) {
                                     </div>
 
                                     <div className="ml-auto">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
+                                        <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8' alt='spotify logo'></img>
                                     </div>
                                 </div>
                             </a>
@@ -145,8 +145,6 @@ export default function TopArtistsSection(props: props) {
                     })}
                 </div>
             </div>
-
-
         </section>
     )
 }
