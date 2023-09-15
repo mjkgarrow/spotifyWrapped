@@ -1,38 +1,35 @@
 import gsap from 'gsap'
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 
 export default function Cursor() {
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const body: HTMLElement | null = document.querySelector('body')
         const cursor: HTMLElement | null = document.querySelector('#cursor')
 
-        const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('button')
-        const links: NodeListOf<HTMLElement> = document.querySelectorAll('a')
+        window.addEventListener('load', () => {
+            const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('button')
+            const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a')
 
+            const onMouseEnter = () => {
+                gsap.to(cursor, { scale: 1.6, duration: 0.3 })
+            }
 
-        const onMouseEnter = () => {
-            gsap.to(cursor, { scale: 1.6, duration: 0.3 })
-        }
+            const onMouseLEave = () => {
+                gsap.to(cursor, { scale: 1, duration: 0.3 })
+            }
 
-        const onMouseLEave = () => {
-            gsap.to(cursor, { scale: 1, duration: 0.3 })
-        }
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', onMouseEnter)
+                button.addEventListener('mouseleave', onMouseLEave)
+            })
 
-
-        buttons.forEach(button => {
-            // button.style.cursor = 'none'
-            button.addEventListener('mouseenter', onMouseEnter)
-            button.addEventListener('mouseleave', onMouseLEave)
+            links.forEach(link => {
+                link.addEventListener('mouseenter', onMouseEnter)
+                link.addEventListener('mouseleave', onMouseLEave)
+            })
         })
-
-        links.forEach(link => {
-            // link.style.cursor = 'none'
-            link.addEventListener('mouseenter', onMouseEnter)
-            link.addEventListener('mouseleave', onMouseLEave)
-        })
-
 
         if (body) {
             body.style.cursor = 'none'
@@ -69,10 +66,10 @@ export default function Cursor() {
 
         };
 
-    }, [])
+    })
 
 
     return (
-        <div id='cursor' className='hidden sm:block fixed z-[9999] h-10 w-10 bg-white mix-blend-difference rounded-[50%] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-opacity duration-[250] ease-in-out'></div>
+        <div id='cursor' className='hidden sm:block fixed z-[999] h-10 w-10 bg-white mix-blend-difference rounded-[50%] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-opacity duration-[250] ease-in-out'></div>
     )
 }
