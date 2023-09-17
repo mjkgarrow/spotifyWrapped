@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
 // ScrollTrigger.normalizeScroll(true)
 
-ScrollTrigger.config({ autoRefreshEvents: "DOMContentLoaded,load,visibilitychange" });
+// ScrollTrigger.config({ autoRefreshEvents: "DOMContentLoaded,load,visibilitychange" });
 
 
 function App() {
