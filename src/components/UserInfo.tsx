@@ -30,7 +30,7 @@ export default function UserInfo() {
 
             {!loading &&
                 <div>
-                    <IconButton
+                    {/* <IconButton
                         size="small"
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
@@ -40,8 +40,8 @@ export default function UserInfo() {
                     >
                         <Avatar
                             alt={profile.user.display_name}
-                            src={profile.user.images[0].url} sx={{ width: 50, height: 50 }} />
-                    </IconButton>
+                            src={profile.user.images[1].url} sx={{ width: 50, height: 50 }} />
+                    </IconButton> */}
 
                     <Menu
                         id="basic-menu"

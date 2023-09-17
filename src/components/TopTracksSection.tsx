@@ -164,7 +164,7 @@ export default function TopTracksSection(props: props) {
                                 <div className="flex gap-4 items-center" ref={el => trackRefs.current[index] = el}>
                                     <p className="text-2xl sm:text-4xl w-full sm:w-14 text-right font-mono">#{index + 1}</p>
 
-                                    <img id={index.toString()} src={track.album.images[0].url} alt={track.name} className="h-24 w-24 sm:h-32 sm:w-32 rounded-lg drop-shadow-2xl" />
+                                    <img id={index.toString()} src={track.album.images[1].url} alt={track.name} className="h-24 w-24 sm:h-32 sm:w-32 rounded-lg drop-shadow-2xl" />
 
                                     <div className="flex flex-col justify-center min-w-max">
                                         <p className="font-bold sm:text-xl italic">{track.name}</p>
@@ -194,7 +194,7 @@ export default function TopTracksSection(props: props) {
                                 <div className="flex gap-4 items-center ">
                                     <div>
 
-                                        <img id={index.toString()} src={track.album.images[0].url} alt={track.name} className="w-20 h-20 rounded-lg" />
+                                        <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20 rounded-lg" />
 
                                     </div>
 

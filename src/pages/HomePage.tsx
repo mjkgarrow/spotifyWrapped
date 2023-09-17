@@ -15,6 +15,8 @@ export default function HomePage() {
         makeApiCall(['tracks', 'artists'], 'medium_term')
     }, [])
 
+
+
     // ---- TODO -----
     // RECOMMENDATIONS SECTION
 
@@ -24,7 +26,6 @@ export default function HomePage() {
             {checkEmpty() ?
                 <CircleLoading /> :
                 <main className="w-screen overflow-hidden" id='scroller'>
-                    <div id='top'></div>
                     <WelcomeSection />
 
                     {data.artists.length && <TopArtistsSection artists={data.artists.slice(0, 5)} />}

@@ -87,7 +87,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             .domain(domain)
             .range([5, screenSize[0] - 5])
 
-    }, [data, screenSize]);
+    }, [data]);
 
     // Compute kernel density estimation
     const density = useMemo(() => {
@@ -98,7 +98,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         return kde(data)
 
-    }, [xScale, screenSize]);
+    }, [xScale]);
 
     // Compute y-axis scale
     const yScale = useMemo(() => {
@@ -109,7 +109,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             .range([screenSize[1] - 10, 50])
             .domain([min, max])
 
-    }, [data, screenSize])
+    }, [data])
 
     // Generate x-axis labels
     // @ts-ignore
@@ -129,7 +129,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         return lineGenerator(density as [number, number][] | Iterable<[number, number]>)
 
-    }, [density, screenSize])
+    }, [density])
     // -----------------------------------------
 
 
@@ -196,7 +196,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                     });
 
                 imageContainer.append('xhtml:img')
-                    .attr('src', track.album.images[0].url)
+                    .attr('src', track.album.images[2].url)
                     .style('width', '100%')
                     .style('height', '100%')
 
@@ -226,7 +226,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         requestAnimationFrame(trackAnimation)
 
-    }, [screenSize])
+    }, [])
 
     // Handle window resizing
     useEffect(() => {
