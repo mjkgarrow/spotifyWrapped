@@ -5,10 +5,15 @@ import EmptySection from "../components/EmptySection"
 // import TopArtistsSection from "../components/TopArtistsSection"
 // import TopTracksSection from "../components/TopTracksSection"
 import ListeningSection from "../components/ListeningSection"
+import { useEffect } from "react"
 
 
 export default function HomePage() {
-    const { data, checkEmpty } = useGlobalState()
+    const { data, checkEmpty, makeApiCall } = useGlobalState()
+
+    useEffect(() => {
+        makeApiCall(['tracks', 'artists'], 'medium_term')
+    }, [])
 
     // ---- TODO -----
     // RECOMMENDATIONS SECTION

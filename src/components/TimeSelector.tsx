@@ -1,7 +1,7 @@
 import { Menu } from '@mui/material';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useGlobalState } from '../context/globalState';
 
 export default function TimeSelector() {
@@ -9,9 +9,10 @@ export default function TimeSelector() {
     const [timeRange, setTimeRange] = useState<string>('medium_term')
     const { makeApiCall } = useGlobalState()
 
-    useEffect(() => {
-        makeApiCall(['tracks', 'artists'], timeRange)
-    }, [timeRange])
+    // useEffect(() => {
+    //     makeApiCall(['tracks', 'artists'], timeRange)
+    // }, [timeRange])
+
 
     // Variables to handle dropdown opening
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -25,6 +26,7 @@ export default function TimeSelector() {
     const handleClick = (event: any) => {
         event.preventDefault()
         setAnchorEl(null)
+        makeApiCall(['tracks', 'artists'], event.target.value)
         setTimeRange(event.target.value)
     };
 
