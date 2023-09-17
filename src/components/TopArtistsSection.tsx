@@ -13,6 +13,7 @@ export default function TopArtistsSection(props: props) {
 
     const comp = useRef(null)
     const wrapperRef = useRef(null)
+    window.innerWidth
 
     const finalTrackRefs = useRef<Array<HTMLAnchorElement | null>>([])
 
@@ -23,7 +24,8 @@ export default function TopArtistsSection(props: props) {
 
             // Side scroll animation 
             let scrollTween = gsap.to(sections, {
-                xPercent: (i) => -100 * i,
+                x: (i) => -window.innerWidth * i,
+                // xPercent: (i) => -100 * i,
                 duration: (i) => 0.01 * i,
                 ease: "none", // <-- IMPORTANT!
                 scrollTrigger: {
