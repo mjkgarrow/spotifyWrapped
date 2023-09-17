@@ -1,6 +1,4 @@
-
 import { useGlobalState } from '../context/globalState';
-import GenericBtn from './GenericBtn';
 
 
 export default function LogoutBtn() {
@@ -12,6 +10,11 @@ export default function LogoutBtn() {
     }
 
     return (
-        <GenericBtn onClick={logOut} text='Logout' />
+        <button
+            onClick={logOut}
+            className="text-lg bg-transparent hover:bg-green-500 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-green-500 hover:border-transparent rounded"
+        >
+            Logout
+        </button>
     )
 }
