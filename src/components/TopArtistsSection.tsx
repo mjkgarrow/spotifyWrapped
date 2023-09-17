@@ -48,8 +48,8 @@ export default function TopArtistsSection(props: props) {
             // Scroll trigger for final track list
             finalTrackRefs.current.forEach(element => {
                 if (element) {
-                    gsap.fromTo(element, { opacity: 0 }, {
-                        opacity: 1,
+                    gsap.fromTo(element, { autoAlpha: 0 }, {
+                        autoAlpha: 1,
                         scrollTrigger: {
                             trigger: element,
                             start: 'top 80%',

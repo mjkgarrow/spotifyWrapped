@@ -1,10 +1,10 @@
 import { useGlobalState } from "../context/globalState"
 import CircleLoading from "../components/CircleLoading"
-import TopTracksSection from "../components/TopTracksSection"
 import WelcomeSection from "../components/WelcomeSection"
 import EmptySection from "../components/EmptySection"
 import TopArtistsSection from "../components/TopArtistsSection"
-import ListeningSection from "../components/ListeningSection"
+// import TopTracksSection from "../components/TopTracksSection"
+// import ListeningSection from "../components/ListeningSection"
 
 
 export default function HomePage() {
@@ -24,9 +24,9 @@ export default function HomePage() {
 
                     {data.artists.length && <TopArtistsSection artists={data.artists.slice(0, 5)} />}
 
-                    {data.tracks.length && <TopTracksSection tracks={data.tracks.slice(0, 5)} />}
+                    {/* {data.tracks.length && <TopTracksSection tracks={data.tracks.slice(0, 5)} />} */}
 
-                    {data.tracks.length && <ListeningSection tracks={data.tracks.slice(0, 99)} />}
+                    {/* {data.tracks.length && <ListeningSection tracks={data.tracks.slice(0, 99)} />} */}
 
                     <EmptySection backgroundColour="bg-orange-400" />
                 </main>

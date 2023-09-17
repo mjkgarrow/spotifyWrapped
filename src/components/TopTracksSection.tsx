@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap"
 import { Track } from "../types/spotifyTypes";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { colours } from "../utils/globals";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type props = {
     tracks: Track[],
@@ -47,13 +47,13 @@ export default function TopTracksSection(props: props) {
                     },
                 })
                     .from(element, {
-                        opacity: 0,
+                        autoAlpha: 0,
                     })
                     .to(element, {
-                        opacity: 1,
+                        autoAlpha: 1,
                     })
                     .to(element, {
-                        opacity: 0,
+                        autoAlpha: 0,
                     })
 
             })
@@ -71,8 +71,8 @@ export default function TopTracksSection(props: props) {
             })
 
             // Scroll trigger for left title fade, only trigger on final element
-            gsap.fromTo(leftRef.current, { opacity: 1 }, {
-                opacity: 0,
+            gsap.fromTo(leftRef.current, { autoAlpha: 1 }, {
+                autoAlpha: 0,
                 scrollTrigger: {
                     trigger: spacerRefs.current[spacerRefs.current.length - 1],
                     start: "top top",
@@ -102,8 +102,8 @@ export default function TopTracksSection(props: props) {
 
             // Scroll trigger for final track list
             finalTrackRefs.current.forEach(element => {
-                gsap.fromTo(element, { opacity: 0 }, {
-                    opacity: 1,
+                gsap.fromTo(element, { autoAlpha: 0 }, {
+                    autoAlpha: 1,
                     scrollTrigger: {
                         trigger: element,
                         start: 'top 80%',

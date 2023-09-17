@@ -4,9 +4,9 @@ import Header from './components/Header';
 import { useGlobalState } from './context/globalState';
 import HomePage from './pages/HomePage'
 import { gsap } from 'gsap';
-import Cursor from './components/Cursor';
 import CallbackPage from "./pages/CallbackPage";
 import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
+// import Cursor from './components/Cursor';
 
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Cursor />
+      {/* <Cursor /> */}
       <Header />
 
       <Routes>
