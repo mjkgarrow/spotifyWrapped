@@ -11,6 +11,7 @@ import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
+ScrollTrigger.normalizeScroll(true)
 
 function App() {
   const { isAuth } = useGlobalState()

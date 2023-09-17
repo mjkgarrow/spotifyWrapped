@@ -31,7 +31,7 @@ export default function TopArtistsSection(props: props) {
                     pin: true,
                     scrub: 0.1,
                     end: `+=${window.innerWidth * sections.length} bottom`,
-                    onRefresh: () => ScrollTrigger.refresh(true)
+                    // onRefresh: () => ScrollTrigger.refresh(true)
                 }
             });
 
@@ -41,7 +41,7 @@ export default function TopArtistsSection(props: props) {
                     trigger: panel as HTMLElement,
                     containerAnimation: scrollTween,
                     start: "left left",
-                    onRefresh: () => ScrollTrigger.refresh(true)
+                    // onRefresh: () => ScrollTrigger.refresh(true)
                 });
             });
 
@@ -55,7 +55,7 @@ export default function TopArtistsSection(props: props) {
                             start: 'top 80%',
                             end: 'bottom 60%',
                             scrub: true,
-                            onRefresh: () => ScrollTrigger.refresh(true)
+                            // onRefresh: () => ScrollTrigger.refresh(true)
                         },
                     })
                 }

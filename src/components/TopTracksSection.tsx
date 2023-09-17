@@ -32,7 +32,7 @@ export default function TopTracksSection(props: props) {
                         start: 'center center',
                         pin: true,
                         pinSpacer: spacerRefs.current[index],
-                        onRefresh: () => ScrollTrigger.refresh(true),
+                        // onRefresh: () => ScrollTrigger.refresh(true),
                     },
                 });
 
@@ -43,7 +43,7 @@ export default function TopTracksSection(props: props) {
                         start: 'top 90%',
                         end: 'bottom top',
                         scrub: true,
-                        onRefresh: () => ScrollTrigger.refresh(true),
+                        // onRefresh: () => ScrollTrigger.refresh(true),
                     },
                 })
                     .from(element, {
@@ -66,7 +66,7 @@ export default function TopTracksSection(props: props) {
                     endTrigger: spacerRefs.current[spacerRefs.current.length - 1],
                     end: `${trackRefs.current[trackRefs.current.length - 1]?.clientHeight} top`,
                     pin: leftRef.current,
-                    onRefresh: () => ScrollTrigger.refresh(true),
+                    // onRefresh: () => ScrollTrigger.refresh(true),
                 }
             })
 
@@ -78,7 +78,7 @@ export default function TopTracksSection(props: props) {
                     start: "top top",
                     scrub: true,
                     endTrigger: spacerRefs.current[spacerRefs.current.length - 1],
-                    onRefresh: () => ScrollTrigger.refresh(true),
+                    // onRefresh: () => ScrollTrigger.refresh(true),
                 }
             })
 
