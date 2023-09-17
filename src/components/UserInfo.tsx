@@ -1,6 +1,6 @@
-import { Avatar, ListItemText, Menu, List, ListItem, IconButton, } from '@mui/material'
+import { ListItemText, Menu, List, ListItem, } from '@mui/material'
 import { getAllUserData } from '../api/spotifyQueries'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGlobalState } from '../context/globalState';
 
 
@@ -10,9 +10,9 @@ export default function UserInfo() {
     const open = Boolean(anchorEl);
     const [loading, setLoading] = useState<boolean>(true)
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
     const handleClose = () => {
         setAnchorEl(null);
