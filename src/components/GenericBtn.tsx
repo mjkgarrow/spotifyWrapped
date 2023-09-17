@@ -8,6 +8,6 @@ type props = {
 export default function GenericBtn(props: props) {
 
     return (
-        <Button variant="contained" color='secondary' onClick={props.onClick}>{props.text}</Button>
+        <Button variant="contained" color='secondary' size="large" onClick={props.onClick}>{props.text}</Button>
     )
 }
