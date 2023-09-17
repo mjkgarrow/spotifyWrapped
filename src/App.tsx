@@ -19,7 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <Cursor /> */}
-      <Header />
+      {/* <Header /> */}
 
       <Routes>
         <Route path="/" element={isAuth() ? <HomePage /> : <SplashScreen />} />
