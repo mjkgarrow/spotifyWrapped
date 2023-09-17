@@ -11,7 +11,7 @@ import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
-ScrollTrigger.normalizeScroll(true)
+// ScrollTrigger.normalizeScroll(true)
 
 ScrollTrigger.config({ autoRefreshEvents: "DOMContentLoaded,load,visibilitychange" });
 
