@@ -1,4 +1,3 @@
-import LoginBtn from '../components/LoginBtn'
 import LogoutBtn from '../components/LogoutBtn'
 import UserInfo from './UserInfo';
 import { useGlobalState } from '../context/globalState';
