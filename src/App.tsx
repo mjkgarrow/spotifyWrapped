@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplashScreen from './components/SplashScreen';
-import Header from './components/Header';
+// import Header from './components/Header';
 import { useGlobalState } from './context/globalState';
 import HomePage from './pages/HomePage'
 import { gsap } from 'gsap';
