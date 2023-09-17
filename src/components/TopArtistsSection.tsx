@@ -25,14 +25,13 @@ export default function TopArtistsSection(props: props) {
             // Side scroll animation 
             let scrollTween = gsap.to(sections, {
                 x: (i) => -window.innerWidth * i,
-                // xPercent: (i) => -100 * i,
-                duration: (i) => 0.01 * i,
+                duration: (i) => i,
                 ease: "none", // <-- IMPORTANT!
                 scrollTrigger: {
                     trigger: wrapperRef.current,
                     pin: true,
-                    scrub: 0.1,
-                    end: `+=${window.innerWidth * sections.length} bottom`,
+                    scrub: true,
+                    end: `+=${(window.innerWidth * sections.length) / 1.5} bottom`,
                     // onRefresh: () => ScrollTrigger.refresh(true)
                 }
             });
