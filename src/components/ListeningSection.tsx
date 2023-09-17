@@ -20,17 +20,17 @@ type ListeningData = {
 }
 
 type LabelType = {
-    popularity: { title: string, x: string[], y: string[] },
-    tempo: { title: string, x: string[], y: string[] },
-    valence: { title: string, x: string[], y: string[] },
-    danceability: { title: string, x: string[], y: string[] },
+    popularity: { title: string, x: string[], y: string[], info: string },
+    tempo: { title: string, x: string[], y: string[], info: string },
+    valence: { title: string, x: string[], y: string[], info: string },
+    danceability: { title: string, x: string[], y: string[], info: string },
 }
 
 const labeling: LabelType = {
-    popularity: { title: 'Popularity', x: ['Niche', 'Smash hit'], y: ['More', 'Less'] },
-    tempo: { title: 'Tempo', x: ['Slower', 'Faster'], y: ['More', 'Less'] },
-    valence: { title: 'Positivity', x: ['Sadder', 'Happier'], y: ['More', 'Less'] },
-    danceability: { title: 'Danceability', x: ['Wackier', 'Rhythmic'], y: ['More', 'Less'] },
+    popularity: { title: 'Popularity', x: ['0', '100'], y: ['More', 'Less'], info: 'Based on the total number of plays and how recent they were, 100 being most popular' },
+    tempo: { title: 'Tempo', x: ['0 bmp', '250 bpm'], y: ['More', 'Less'], info: 'Estimated tempo in beats per minute' },
+    valence: { title: 'Positivity', x: ['Sadder', 'Happier'], y: ['More', 'Less'], info: 'An indicator of cheerful or euphoric music vs sad or angry music, 1 being most positive' },
+    danceability: { title: 'Danceability', x: ['o', '100'], y: ['More', 'Less'], info: 'Suitability for dancing, based on tempo, rhythm and beat strength, 1 being most danceable' },
 }
 
 export default function ListeningSection(props: props) {
@@ -100,7 +100,7 @@ export default function ListeningSection(props: props) {
         const topGraphDomain = Math.max(...graphData)
         const topDataDomain = Math.max(...dataArray)
 
-        return topGraphDomain < topDataDomain ? topDataDomain : topGraphDomain
+        return topGraphDomain < topDataDomain ? topDataDomain * 1.1 : topGraphDomain * 1.1
     }
 
     return (
@@ -127,23 +127,3 @@ export default function ListeningSection(props: props) {
         </section>
     )
 }
-
-
-
-// Get average popularity of your top 10 songs
-// The popularity of the track. The value will be between 0 and 100, with 100 being the most popular. The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.
-
-// Get intrumentalness vs speechiness
-// Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
-
-// Loudness
-// The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.
-
-// Average tempo
-// The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
-
-// Valence
-// A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
-
-// Danceability
-// Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.

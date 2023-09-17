@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { kernelDensityEstimator, kernelEpanechnikov } from '../utils/helpers'
 import gsap from "gsap";
 import { AudioFeatures, Track } from "../types/spotifyTypes";
@@ -15,16 +15,15 @@ type DensityChartProps = {
     data: number[];
     domain: number[],
     colours: string[],
-    labels: { title: string, x: string[], y: string[] }
+    labels: { title: string, x: string[], y: string[], info: string }
     topTracks: TopTracksType[],
     graphType: string,
 }
 
 export const DensityChart = ({ data, domain, colours, labels, topTracks, graphType }: DensityChartProps) => {
     // Constants for image sizing
-    const imageSize = 70
+    const imageSize = 60
     const borderRadius = 5
-
 
     // Refs for GSAP to access
     const container = useRef<HTMLDivElement | null>(null)
@@ -32,15 +31,9 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
     const line2 = useRef<SVGPathElement | null>(null)
     const graphPic = useRef<SVGSVGElement | null>(null)
 
-    const [rangeVal, setRangeVal] = useState<number>(7);
     const [prog, setProg] = useState<number>(0);
     const [screenSize, setScreenSize] = useState<number[]>([window.innerWidth * 0.8, window.innerHeight * 0.5]);
 
-
-    const handleSliderChange = (event: ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault();
-        setRangeVal(parseFloat(event.target.value));
-    };
 
     const findY = (x: number): number => {
         const path = line.current;
@@ -94,18 +87,18 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             .domain(domain)
             .range([5, screenSize[0] - 5])
 
-    }, [data, rangeVal, screenSize]);
+    }, [data, screenSize]);
 
     // Compute kernel density estimation
     const density = useMemo(() => {
         const kde = kernelDensityEstimator(
-            kernelEpanechnikov(rangeVal),
-            xScale.ticks(100)
+            kernelEpanechnikov(5),
+            xScale.ticks(50)
         )
 
         return kde(data)
 
-    }, [xScale, rangeVal, screenSize]);
+    }, [xScale, screenSize]);
 
     // Compute y-axis scale
     const yScale = useMemo(() => {
@@ -116,7 +109,15 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
             .range([screenSize[1] - 10, 50])
             .domain([min, max])
 
-    }, [data, rangeVal, screenSize])
+    }, [data, screenSize])
+
+    // Generate x-axis labels
+    // @ts-ignore
+    const xAxis = (g) => {
+        g.attr("class", "x-label")
+            .attr("transform", `translate(0,${screenSize[1] + 10})`)
+            .call(d3.axisBottom(xScale))
+    }
 
     // Compute path
     const path = useMemo(() => {
@@ -128,12 +129,35 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         return lineGenerator(density as [number, number][] | Iterable<[number, number]>)
 
-    }, [density, rangeVal, screenSize])
+    }, [density, screenSize])
     // -----------------------------------------
 
 
-    // Add top tracks to svg
+    // Add x-axis labels and top tracks to svg
     useEffect(() => {
+        const svgElement = d3.select(graphPic.current)
+
+        svgElement.selectAll(".y-label").remove()
+        svgElement.selectAll(".x-label").remove()
+
+        svgElement.append('g').call(xAxis)
+
+        svgElement.append("text")
+            .attr("class", "y-label")
+            .attr("text-anchor", "middle")
+            .attr("x", screenSize[1] * 0.05)
+            .attr("y", screenSize[1] * 0.05)
+            .style('font-weight', '300')
+            .text(labels.y[0])
+
+        svgElement.append("text")
+            .attr("class", "y-label")
+            .attr("text-anchor", "middle")
+            .attr("x", screenSize[1] * 0.05)
+            .attr("y", screenSize[1] - (screenSize[1] * 0.05))
+            .style('font-weight', '300')
+            .text(labels.y[1]);
+
         const trackAnimation = () => {
             const svgElement = d3.select(graphPic.current)
 
@@ -202,38 +226,6 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         requestAnimationFrame(trackAnimation)
 
-    }, [rangeVal, screenSize])
-
-    // Add x-axis labels
-    useEffect(() => {
-        const svgElement = d3.select(graphPic.current)
-
-        svgElement.selectAll(".x-label").remove();
-
-        svgElement.append("text")
-            .attr("class", "x-label")
-            .attr("text-anchor", "middle")
-            .attr("x", screenSize[1] * 0.1)
-            .attr("y", screenSize[1] + 10)
-            .style('font-weight', '600')
-            .text(labels.x[0])
-
-        svgElement.append("text")
-            .attr("class", "x-label")
-            .attr("text-anchor", "middle")
-            .attr("x", screenSize[0] - (screenSize[1] * 0.1))
-            .attr("y", screenSize[1] + 10)
-            .style('font-weight', '600')
-            .text(labels.x[1]);
-
-        svgElement.append("text")
-            .attr("class", "x-label")
-            .attr("text-anchor", 'middle')
-            .attr("x", (screenSize[0] / 2))
-            .attr("y", screenSize[1] + 10)
-            .style('font-weight', '700')
-            .text('<---  --->');
-
     }, [screenSize])
 
     // Handle window resizing
@@ -300,7 +292,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
 
         requestAnimationFrame(animateLineWithTopTracks)
 
-    }, [rangeVal, prog, screenSize])
+    }, [prog, screenSize])
 
     // Apply GSAP animations to panels
     useLayoutEffect(() => {
@@ -328,7 +320,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
         <div className="h-screen w-screen flex items-center flex-col justify-center" ref={container}>
             <p className="text-4xl p-4 bg-white shadow-2xl rounded-xl mb-8">{labels.title}</p>
 
-            <div className="rounded-lg shadow-2xl p-4" style={{ backgroundColor: colours[0] }}>
+            <div className="rounded-lg shadow-2xl p-4 mb-4" style={{ backgroundColor: colours[0] }}>
                 <svg ref={graphPic} width={screenSize[0]} height={screenSize[1] + 20} className="overflow-visible">
                     <path
                         ref={line}
@@ -348,16 +340,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                     />
                 </svg>
             </div>
-
-            <input
-                type="range"
-                value={rangeVal}
-                min={2}
-                max={12}
-                step={0.1}
-                onChange={(event) => handleSliderChange(event)}
-                className="mt-8 mb-2 w-1/5 h-2 bg-gray-500 outline-none opacity-[0.7] rounded-full transition-opacity duration-200 hover:opacity-100" id="myRange"></input>
-            <p className="mb-4">Smoothing</p>
+            <p className="font-semibold text-center px-4">{labels.info}</p>
         </div>
     )
 }
