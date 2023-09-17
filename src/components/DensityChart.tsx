@@ -30,6 +30,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
     const line = useRef<SVGPathElement | null>(null)
     const line2 = useRef<SVGPathElement | null>(null)
     const graphPic = useRef<SVGSVGElement | null>(null)
+    const [op, setOp] = useState<number | null>(null)
 
     const [prog, setProg] = useState<number>(0);
     const [screenSize, setScreenSize] = useState<number[]>([window.innerWidth * 0.8, window.innerHeight * 0.5]);
@@ -279,11 +280,17 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                     const xCoord = getXCoord(topTracks[index][graphType]);
                     const lineXCoord = getLineXCoord(svgAnim2);
                     const threshold = xCoord - 10
-                    // const threshold = xCoord - (screenSize[0] * 0.01)
 
-                    const opacityPct = ((lineXCoord - threshold) / (xCoord - threshold))
+                    let opacity
 
-                    const opacity = xCoord < lineXCoord ? 1 : opacityPct;
+                    if (lineXCoord - threshold > 0) {
+                        const opacityPct = ((lineXCoord - threshold) / (xCoord - threshold))
+                        opacity = xCoord < lineXCoord ? 1 : opacityPct;
+                    } else {
+                        opacity = 0
+                    }
+
+                    setOp(opacity)
 
                     // @ts-ignore
                     d3.select(this).attr("style", `opacity: ${opacity}`);
@@ -319,6 +326,7 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
     return (
         <div className="h-screen w-screen flex items-center flex-col justify-center" ref={container}>
             <p className="text-4xl p-4 bg-white shadow-2xl rounded-xl mb-8">{labels.title}</p>
+            <p>{op}</p>
 
             <div className="rounded-lg shadow-2xl p-4 mb-4" style={{ backgroundColor: colours[0] }}>
                 <svg ref={graphPic} width={screenSize[0]} height={screenSize[1] + 20} className="overflow-visible">
