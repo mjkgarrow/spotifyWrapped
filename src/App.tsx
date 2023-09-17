@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplashScreen from './components/SplashScreen';
-// import Header from './components/Header';
+import Header from './components/Header';
 import { useGlobalState } from './context/globalState';
 import HomePage from './pages/HomePage'
 import { gsap } from 'gsap';
@@ -11,22 +11,27 @@ import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
-// ScrollTrigger.normalizeScroll(true)
+ScrollTrigger.normalizeScroll(true)
+
+ScrollTrigger.config({ autoRefreshEvents: "DOMContentLoaded,load,visibilitychange" });
+
 
 function App() {
   const { isAuth } = useGlobalState()
 
   return (
-    <BrowserRouter>
-      {/* <Cursor /> */}
-      {/* <Header /> */}
+    <div className="scroller">
+      <BrowserRouter>
+        {/* <Cursor /> */}
+        <Header />
 
-      <Routes>
-        <Route path="/" element={isAuth() ? <HomePage /> : <SplashScreen />} />
-        <Route path="callback" element={<CallbackPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={isAuth() ? <HomePage /> : <SplashScreen />} />
+          <Route path="callback" element={<CallbackPage />} />
+        </Routes>
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   )
 }
 
