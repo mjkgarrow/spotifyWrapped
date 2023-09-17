@@ -1,5 +1,5 @@
 const CLIENT_ID: string = 'e68b332488db43fb8639650151541950'
-const REDIRECT_URI: string = import.meta.env.VITE_VITE_REDIRECT_URL || 'https://spotifywrap.netlify.app/callback'
+const REDIRECT_URI: string = import.meta.env.VITE_REDIRECT_URI || 'https://spotifywrap.netlify.app/callback'
 const SCOPES: string[] = ["user-top-read", "user-follow-read"]
 
 function generateCodeVerifier(length: number): string {
