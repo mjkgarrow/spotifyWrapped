@@ -8,7 +8,11 @@ export default {
     extend: {
       animation: {
         'spin': 'spin 2s ease-in-out infinite',
-      }
+      },
+      height: {
+        screen: ['100vh', '100dvh'],
+      },
+
     },
   },
 }
