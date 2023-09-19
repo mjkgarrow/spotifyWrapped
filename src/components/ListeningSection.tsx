@@ -106,11 +106,15 @@ export default function ListeningSection(props: props) {
     return (
         <section>
 
-            <div className="flex items-center justify-center w-screen h-screen bg-[#9F6FE2]">
-                <div className="sm:w-max text-4xl font-serif bg-white rounded-xl p-2 sm:p-4 drop-shadow-lg">Your listening stats</div>
+            <div className="flex flex-col items-center justify-center w-screen h-screen bg-[#9F6FE2]">
+                <h1 className="sm:w-max text-4xl font-serif bg-white rounded-xl p-2 sm:p-4 drop-shadow-lg">Your listening stats</h1>
+                <p className="font-bold mt-4 text-xl">Based on data from your top 50 tracks</p>
+                <div className="w-full flex justify-center mt-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="bg-white w-14 h-14 rounded-full p-2 animate-bounce fill-green-500"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" /></svg>
+                </div>
             </div>
 
-            <div className="bg-[#9F6FE2]">
+            <div className="bg-[#9F6FE2] h-[800vh]">
                 {loaded && Object.keys(listeningData!).map((key, index) =>
                     <DensityChart
                         key={key}
