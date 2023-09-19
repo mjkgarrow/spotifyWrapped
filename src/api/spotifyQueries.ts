@@ -1,5 +1,5 @@
 import api from './axiosConfig';
-import { Artist, SimplifiedPlaylist, UserProfile, AudioFeaturesCollection } from '../types/spotifyTypes';
+import { Artist, SimplifiedPlaylist, UserProfile, AudioFeaturesCollection, RecommendationObject } from '../types/spotifyTypes';
 
 export async function getProfile(): Promise<UserProfile> {
     const response = await api.get('v1/me')
@@ -76,4 +76,13 @@ export async function getTracksFeatures(ids: string[]): Promise<AudioFeaturesCol
     const response = await api.get(uri);
 
     return response.data;
+}
+
+export async function getRecommendations(seed_artists: string[] = [], seed_genres: string[] = [], seed_tracks: string[] = [],): Promise<RecommendationObject> {
+    let uri = `v1/recommendations?seed_artists=${seed_artists.join()}&seed_genres=${seed_genres.join()}&seed_tracks=${seed_tracks.join()}`
+
+    // Make the API request
+    const response = await api.get(uri)
+
+    return response.data
 }
