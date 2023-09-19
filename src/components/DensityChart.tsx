@@ -23,7 +23,6 @@ type DensityChartProps = {
 export const DensityChart = ({ data, domain, colours, labels, topTracks, graphType }: DensityChartProps) => {
     // Constants for image sizing
     const imageSize = 60
-    const borderRadius = 5
 
     // Refs for GSAP to access
     const container = useRef<HTMLDivElement | null>(null)

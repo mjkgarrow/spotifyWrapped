@@ -1,6 +1,6 @@
 const CLIENT_ID: string = 'e68b332488db43fb8639650151541950'
 const REDIRECT_URI: string = import.meta.env.VITE_REDIRECT_URI || 'https://wrapmenow.netlify.app/callback'
-const SCOPES: string[] = ["user-top-read", "user-follow-read"]
+const SCOPES: string[] = ["user-top-read"]
 
 function generateCodeVerifier(length: number): string {
     let text = '';
