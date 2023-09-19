@@ -15,7 +15,7 @@ export default function TopArtistsSection(props: props) {
     const wrapperRef = useRef(null)
     window.innerWidth
 
-    const finalTrackRefs = useRef<Array<HTMLAnchorElement | null>>([])
+    const finalTrackRefs = useRef<Array<HTMLDivElement | null>>([])
 
     useLayoutEffect(() => {
 
@@ -32,7 +32,6 @@ export default function TopArtistsSection(props: props) {
                     pin: true,
                     scrub: true,
                     end: `+=${(window.innerWidth * sections.length) / 1.5} bottom`,
-                    // onRefresh: () => ScrollTrigger.refresh(true)
                 }
             });
 
@@ -42,7 +41,6 @@ export default function TopArtistsSection(props: props) {
                     trigger: panel as HTMLElement,
                     containerAnimation: scrollTween,
                     start: "left left",
-                    // onRefresh: () => ScrollTrigger.refresh(true)
                 });
             });
 
@@ -56,7 +54,6 @@ export default function TopArtistsSection(props: props) {
                             start: 'top 80%',
                             end: 'bottom 60%',
                             scrub: true,
-                            // onRefresh: () => ScrollTrigger.refresh(true)
                         },
                     })
                 }
@@ -71,7 +68,7 @@ export default function TopArtistsSection(props: props) {
 
 
     return (
-        <section ref={comp} className="shadow-2xl">
+        <section ref={comp}>
 
             {/* Main artists reveal */}
             <div ref={wrapperRef} className="bg-purple-400">
@@ -123,8 +120,7 @@ export default function TopArtistsSection(props: props) {
 
                     {artists.map((artist, index) => {
                         return (
-                            <a
-                                href={artist.external_urls.spotify} target='_blank'
+                            <div
                                 key={artist.id}
                                 ref={ref => { finalTrackRefs.current[index] = ref }}
                                 className="shadow-xl group rounded-xl p-2 pr-8 hover:shadow-2xl hover:bg-green-200/30 transition-all duration-75 ease-in-out">
@@ -138,10 +134,12 @@ export default function TopArtistsSection(props: props) {
                                     </div>
 
                                     <div className="ml-auto">
-                                        <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8' alt='spotify logo'></img>
+                                        <a href={artist.external_urls.spotify} target='_blank'>
+                                            <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
+                                        </a>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         )
                     })}
                 </div>
