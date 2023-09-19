@@ -705,3 +705,17 @@ export interface Queue {
     currently_playing: Track | Episode | null
     queue: (Track | Episode)[]
 }
+
+export interface RecommendationSeed {
+    afterFilteringSize: number;
+    afterRelinkingSize: number;
+    href: null;
+    id: string;
+    initialPoolSize: number;
+    type: string;
+}
+
+export interface RecommendationObject {
+    seeds: RecommendationSeed
+    tracks: Track[]
+}
