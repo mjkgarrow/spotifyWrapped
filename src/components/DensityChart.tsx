@@ -180,49 +180,24 @@ export const DensityChart = ({ data, domain, colours, labels, topTracks, graphTy
                     .attr("height", imageSize)
                     .style('opacity', '0')
 
+                foreignObject.append('xhtml:span')
+                    .text(`${track.artists[0].name}: ${track.name}`)
+
                 const imageContainer = foreignObject.append('xhtml:div')
                     .style('width', '100%')
                     .style('height', '100%')
-                    .style('border-radius', `${borderRadius}px`)
-                    .style('overflow', 'hidden')
-                    .style('cursor', 'pointer') // Set cursor style to "pointer"
                     .style('transform', 'scale(1)') // Set the initial scale
                     .style('transition', 'transform 0.1s ease') // Add a smooth transition effect
-                    // .style('transition', 'transform 0.1s ease') // Add a smooth transition effect
-                    .on('mouseenter', () => { // Add mouseenter event listener for hover effect
-                        imageContainer.style('transform', 'scale(0.9)'); // Scale up on hover
-                    })
-                    .on('mouseleave', () => { // Add mouseleave event listener for hover effect
-                        imageContainer.style('transform', 'scale(1)'); // Reset scale on mouse leave
-                    });
 
-                imageContainer.append('xhtml:img')
+                const anchor = imageContainer.append('xhtml:a')
+                    .attr('href', track.external_urls.spotify)
+                    .attr('target', '_blank')
+
+                anchor.append('xhtml:img')
                     .attr('src', track.album.images[2].url)
                     .style('width', '100%')
                     .style('height', '100%')
 
-
-                // Create and append an audio element
-                const audioElement = document.createElement('audio');
-                audioElement.controls = false
-                audioElement.volume = 0.1
-                audioElement.preload = 'auto'
-                audioElement.src = track.preview_url!
-
-                // Initialize a variable to track the playback state
-                let isPlaying = false;
-
-                // Add an event listener to toggle play/pause when the link is clicked
-                foreignObject.on('click', () => {
-                    if (isPlaying) {
-                        audioElement.pause(); // Pause the audio
-                    } else {
-                        audioElement.play(); // Play the audio
-                    }
-
-                    // Update the playback state
-                    isPlaying = !isPlaying;
-                });
             });
         }
 

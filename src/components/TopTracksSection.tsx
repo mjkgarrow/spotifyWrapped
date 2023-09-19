@@ -159,7 +159,7 @@ export default function TopTracksSection(props: props) {
                                 <div className="flex gap-4 items-center" ref={el => trackRefs.current[index] = el}>
                                     <p className="text-2xl sm:text-4xl w-full sm:w-14 text-right font-mono">#{index + 1}</p>
 
-                                    <img id={index.toString()} src={track.album.images[1].url} alt={track.name} className="h-24 w-24 sm:h-32 sm:w-32 rounded-lg drop-shadow-2xl" />
+                                    <img id={index.toString()} src={track.album.images[1].url} alt={track.name} className="h-24 w-24 sm:h-32 sm:w-32 drop-shadow-2xl" />
 
                                     <div className="flex flex-col justify-center min-w-max">
                                         <p className="font-bold sm:text-xl italic">{track.name}</p>
@@ -185,7 +185,7 @@ export default function TopTracksSection(props: props) {
                                 <div className="flex gap-4 items-center ">
 
                                     <div>
-                                        <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20 rounded-lg" />
+                                        <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20" />
                                     </div>
 
                                     <div className="flex flex-col justify-center">
@@ -201,7 +201,7 @@ export default function TopTracksSection(props: props) {
                                                 <svg onClick={(event) => handlePlayClick(event, track.id)} id={`play-${track.id}`} xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512" className="hover:hover:opacity-50 cursor-pointer transition-all duration-100 ease-in-out"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
                                             )}
                                             <a href={track.external_urls.spotify} target='_blank'>
-                                                <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
+                                                <img src='/assets/images/icons/Spotify_Icon_RGB_Black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
                                             </a>
 
                                         </div>
@@ -216,36 +216,3 @@ export default function TopTracksSection(props: props) {
         </section>
     )
 }
-// <a
-//     // href={track.external_urls.spotify}
-//     href={`${track.preview_url ? '#' : track.external_urls.spotify}`}
-//     target='_blank'
-//     key={track.id}
-//     ref={ref => { finalTrackRefs.current[index] = ref }}
-//     onClick={(event) => handlePlayClick(event, track.id)}
-//     className="shadow-xl group rounded-xl p-2 pr-8 hover:shadow-2xl hover:bg-green-200/30 transition-all duration-75 ease-in-out">
-//     <div className="flex gap-4 items-center ">
-//         <div>
-
-//             <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20 rounded-lg" />
-
-//         </div>
-
-//         <div className="flex flex-col justify-center">
-//             <p className="font-bold text-lg sm:text-xl italic transition-all duration-100 ease-in-out">{track.name}</p>
-//             <p className="font-thin text-lg sm:text-xl transition-all duration-100 ease-in-out">{track.artists[0].name}</p>
-//         </div>
-
-//         <div className="ml-auto">
-//             {track.preview_url ? (
-//                 <>
-//                     <audio id={`audio-${track.id}`} src={track.preview_url!} data-wave-id={track.id} ></audio>
-
-//                     <svg id={`play-${track.id}`} xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512" className="transition-transform duration-100 ease-in-out"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
-//                 </>
-//             ) :
-//                 <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8' alt='spotify logo'></img>
-//             }
-//         </div>
-//     </div>
-// </a>

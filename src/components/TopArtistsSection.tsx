@@ -96,9 +96,9 @@ export default function TopArtistsSection(props: props) {
 
                                 <div>
 
-                                    <img id={index.toString()} src={artist.images[1].url} alt={artist.name} className="w-72 h-7w-72 sm:w-80 sm:h-80 rounded-lg absolute blur-lg scale-[1.01] -z-10" />
+                                    <img id={index.toString()} src={artist.images[1].url} alt={artist.name} className="w-72 h-7w-72 sm:w-80 sm:h-80 absolute blur-lg scale-[1.01] -z-10" />
 
-                                    <img id={index.toString()} src={artist.images[1].url} alt={artist.name} className="w-72 h-7w-72 sm:h-80 sm:w-80 rounded-lg" />
+                                    <img id={index.toString()} src={artist.images[1].url} alt={artist.name} className="w-72 h-7w-72 sm:h-80 sm:w-80" />
 
                                 </div>
 
@@ -126,7 +126,7 @@ export default function TopArtistsSection(props: props) {
                                 className="shadow-xl group rounded-xl p-2 pr-8 hover:shadow-2xl hover:bg-green-200/30 transition-all duration-75 ease-in-out">
                                 <div className="flex gap-4 items-center">
                                     <div>
-                                        <img id={index.toString()} src={artist.images[2].url} alt={artist.name} className="w-20 h-20 rounded-lg" />
+                                        <img id={index.toString()} src={artist.images[2].url} alt={artist.name} className="w-20 h-20" />
                                     </div>
 
                                     <div className="flex flex-col justify-center">
@@ -135,7 +135,7 @@ export default function TopArtistsSection(props: props) {
 
                                     <div className="ml-auto">
                                         <a href={artist.external_urls.spotify} target='_blank'>
-                                            <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
+                                            <img src='/assets/images/icons/Spotify_Icon_RGB_Black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
                                         </a>
                                     </div>
                                 </div>

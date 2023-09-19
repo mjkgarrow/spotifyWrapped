@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { gsap } from 'gsap';
 import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
 import { useGlobalState } from './context/globalState';
+// import Cursor from './components/Cursor';
 import Header from './components/Header';
-import Cursor from './components/Cursor';
 import SplashScreen from './components/SplashScreen';
 import HomePage from './pages/HomePage'
 import CallbackPage from "./pages/CallbackPage";
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Cursor />
+      {/* <Cursor /> */}
       <Header />
 
       <Routes>

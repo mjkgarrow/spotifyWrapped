@@ -186,7 +186,7 @@ export default function RecommendedSection() {
                                     <div className="flex gap-4 items-center ">
 
                                         <div>
-                                            <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20 rounded-lg" />
+                                            <img id={index.toString()} src={track.album.images[2].url} alt={track.name} className="w-20 h-20" />
                                         </div>
 
                                         <div className="flex flex-col justify-center">
@@ -202,7 +202,7 @@ export default function RecommendedSection() {
                                                     <svg onClick={(event) => handlePlayClick(event, track.id)} id={`play-${track.id}`} xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512" className="hover:hover:opacity-50 cursor-pointer transition-all duration-100 ease-in-out"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" /></svg>
                                                 )}
                                                 <a href={track.external_urls.spotify} target='_blank'>
-                                                    <img src='/assets/images/Spotify-Icon-png-rgb-black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
+                                                    <img src='/assets/images/icons/Spotify_Icon_RGB_Black.png' className='w-8 hover:opacity-50 transition-all duration-100 ease-in-out' alt='spotify logo'></img>
                                                 </a>
 
                                             </div>
