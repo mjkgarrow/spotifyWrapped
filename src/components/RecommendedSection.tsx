@@ -167,8 +167,8 @@ export default function RecommendedSection() {
 
                             <img src='/assets/images/vinyl.png' ref={vinylImg} id='vinyl' className='h-[70vh] w-[70vh] rotate-[-20deg]'></img>
 
-                            <div >
-                                <svg viewBox="0 0 100 100" ref={vinylTitle} className='absolute mt-[10vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-[.4]'><defs><path id="circle" d="M 50, 50m -37, 0a 37,37 0 1,1 74,0a 37,37 0 1,1 -74,0" /></defs><text><textPath xlinkHref="#circle" className='fill-red-800'>music recommendations</textPath></text></svg>
+                            <div>
+                                <svg viewBox="0 0 100 100" ref={vinylTitle} className='absolute mt-[10vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-[0.3]'><defs><path id="circle" d="M 50, 50m -37, 0a 37,37 0 1,1 74,0a 37,37 0 1,1 -74,0" /></defs><text><textPath xlinkHref="#circle" className='fill-red-800'>music recommendations</textPath></text></svg>
                             </div>
 
                         </div>
