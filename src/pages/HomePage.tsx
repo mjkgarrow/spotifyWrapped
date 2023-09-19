@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useGlobalState } from "../context/globalState"
 import CircleLoading from "../components/CircleLoading"
 import WelcomeSection from "../components/WelcomeSection"
@@ -5,7 +6,7 @@ import EmptySection from "../components/EmptySection"
 import TopArtistsSection from "../components/TopArtistsSection"
 import TopTracksSection from "../components/TopTracksSection"
 import ListeningSection from "../components/ListeningSection"
-import { useEffect } from "react"
+import RecommendedSection from "../components/RecommendedSection"
 
 
 export default function HomePage() {
@@ -15,17 +16,12 @@ export default function HomePage() {
         makeApiCall(['tracks', 'artists'], 'medium_term')
     }, [])
 
-
-
-    // ---- TODO -----
-    // RECOMMENDATIONS SECTION
-
     return (
 
         <>
             {checkEmpty() ?
                 <CircleLoading /> :
-                <main className="w-screen overflow-hidden" id='scroller'>
+                <main className="w-screen">
                     <WelcomeSection />
 
                     {data.artists.length && <TopArtistsSection artists={data.artists.slice(0, 5)} />}
@@ -34,7 +30,9 @@ export default function HomePage() {
 
                     {data.tracks.length && <ListeningSection tracks={data.tracks.slice(0, 99)} />}
 
-                    <EmptySection backgroundColour="bg-orange-400" />
+                    {data.tracks.length && <RecommendedSection />}
+
+                    <EmptySection backgroundColour="bg-teal-400" />
                 </main>
             }
 

@@ -95,3 +95,27 @@ export function kernelEpanechnikov(k: number) {
         return Math.abs((v /= k)) <= 1 ? (0.75 * (1 - v * v)) / k : 0;
     };
 }
+
+export function getTopKeys(objArr: object[], itemCount: number = 5, key: string): string[] {
+
+    const countedObj = {}
+
+    objArr.slice(0, itemCount).forEach(item => {
+        //@ts-ignore
+        item[key].forEach(subItem => {
+            //@ts-ignore
+            countedObj[subItem] = (countedObj[subItem] || 0) + 1
+        })
+    })
+
+    const arr = Object.entries(countedObj).map(([genre, count]) => ({
+        genre,
+        count,
+    }));
+
+    // Sort the genreArray in descending order by count
+    //@ts-ignore
+    arr.sort((a, b) => b.count - a.count);
+
+    return arr.reduce((prev: string[], item) => [...prev, item.genre], [])
+}
