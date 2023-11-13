@@ -74,8 +74,8 @@ export default function TopArtistsSection(props: props) {
             <div ref={wrapperRef} className="bg-purple-400">
 
                 <div className="absolute w-screen z-10">
-                    <div className="w-screen flex justify-center mt-32">
-                        <div className="w-fit text-4xl font-serif bg-white rounded-xl p-2 sm:p-4 drop-shadow-lg">Your fave artists</div>
+                    <div className="w-screen flex justify-center mt-20">
+                        <div className="w-fit text-3xl font-serif bg-white rounded-xl p-2 sm:p-4 drop-shadow-lg">Your fave artists</div>
                     </div>
                 </div>
 
@@ -88,11 +88,11 @@ export default function TopArtistsSection(props: props) {
                         return (
                             <div
                                 key={artist.id}
-                                className='panel h-screen pt-[10vh] w-screen shadow-2xl flex gap-4 justify-center items-center flex-col'
+                                className='panel h-screen pt-[20lvh] w-screen shadow-2xl flex gap-4 justify-center items-center flex-col'
 
                                 style={{ backgroundColor: `${colours[index]}` }}>
 
-                                <p className="font-mono text-2xl sm:text-6xl w-6 sm:w-14 text-right">#{index + 1}</p>
+                                <p className="font-mono text-2xl sm:text-5xl w-6 sm:w-14 text-right">#{index + 1}</p>
 
                                 <div>
 

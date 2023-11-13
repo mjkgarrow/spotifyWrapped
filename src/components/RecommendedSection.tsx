@@ -105,9 +105,10 @@ export default function RecommendedSection() {
                         autoAlpha: 1,
                         scrollTrigger: {
                             trigger: element,
-                            start: 'center 45%',
-                            end: `center 35%`,
+                            start: 'center 60%',
+                            end: `center 45%`,
                             scrub: true,
+                            markers: true
                         },
                     })
             })
@@ -175,7 +176,7 @@ export default function RecommendedSection() {
                     </div>
                 </div>
 
-                <div className='absolute translate-y-1/2'>
+                <div className='absolute translate-y-2/3'>
                     <div className='flex flex-col justify-center items-center gap-4 w-screen' ref={spacer}>
                         {recs.length && recs.map((track, index) => {
                             return (
