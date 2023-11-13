@@ -107,8 +107,7 @@ export default function RecommendedSection() {
                             trigger: element,
                             start: 'center 60%',
                             end: `center 45%`,
-                            scrub: true,
-                            markers: true
+                            scrub: true
                         },
                     })
             })
